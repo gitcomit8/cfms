@@ -4,6 +4,34 @@ import { authenticateToken, roleGuard } from '../middleware/auth.js';
 
 const router = express.Router();
 
+// Get my scores (judge endpoint) - must come before param-based routes
+router.get('/my-scores', authenticateToken, roleGuard(['judge']), async (req, res, next) => {
+  try {
+    const judgeId = req.user.ParticipantID;
+
+    const [scores] = await pool.execute(`
+      SELECT 
+        js.ScoreID, js.JudgeID, js.TeamID, js.EventID, js.CriteriaName, 
+        js.Score, js.Weight, js.ScoredAt,
+        t.TeamName, e.EventName,
+        p.FName, p.LName
+      FROM Judges_Scores js
+      JOIN Teams t ON js.TeamID = t.TeamID
+      JOIN Events e ON js.EventID = e.EventID
+      JOIN Participants p ON t.LeaderID = p.ParticipantID
+      WHERE js.JudgeID = ?
+      ORDER BY js.ScoredAt DESC
+    `, [judgeId]);
+
+    res.json({
+      scores: scores
+    });
+
+  } catch (error) {
+    next(error);
+  }
+});
+
 // Submit a score for a team (judge only)
 router.post('/', authenticateToken, roleGuard(['judge']), async (req, res, next) => {
   try {
@@ -121,34 +149,6 @@ router.get('/leaderboard/:eventId', async (req, res, next) => {
   }
 });
 
-// Get scores submitted by me (judge endpoint)
-router.get('/my-scores', authenticateToken, roleGuard(['judge']), async (req, res, next) => {
-  try {
-    const judgeId = req.user.ParticipantID;
-
-    const [scores] = await pool.execute(`
-      SELECT 
-        js.ScoreID, js.JudgeID, js.TeamID, js.EventID, js.CriteriaName, 
-        js.Score, js.Weight, js.ScoredAt,
-        t.TeamName, e.EventName,
-        p.FName, p.LName
-      FROM Judges_Scores js
-      JOIN Teams t ON js.TeamID = t.TeamID
-      JOIN Events e ON js.EventID = e.EventID
-      JOIN Participants p ON t.LeaderID = p.ParticipantID
-      WHERE js.JudgeID = ?
-      ORDER BY js.ScoredAt DESC
-    `, [judgeId]);
-
-    res.json({
-      scores: scores
-    });
-
-  } catch (error) {
-    next(error);
-  }
-});
-
 // Get scores for specific event (judge can view all scores for event they're judging)
 router.get('/event/:eventId/all-scores', authenticateToken, roleGuard(['judge', 'admin']), async (req, res, next) => {
   try {
@@ -194,3 +194,4 @@ router.get('/event/:eventId/all-scores', authenticateToken, roleGuard(['judge', 
 });
 
 export default router;
+

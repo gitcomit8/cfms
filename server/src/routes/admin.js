@@ -9,42 +9,44 @@ router.get('/users', authenticateToken, roleGuard(['admin']), async (req, res, n
   try {
     const { role, college, limit = 50, offset = 0 } = req.query;
 
-    let query = `
-      SELECT 
-        ParticipantID, FName, LName, Email, Phone, College, Role, CreatedAt
-      FROM Participants
-      WHERE 1=1
-    `;
-    const params = [];
+    let whereConditions = [];
+    let params = [];
 
     if (role) {
-      query += ' AND Role = ?';
+      whereConditions.push('Role = ?');
       params.push(role);
     }
 
     if (college) {
-      query += ' AND College = ?';
+      whereConditions.push('College = ?');
       params.push(college);
     }
 
-    query += ' ORDER BY CreatedAt DESC';
-    query += ' LIMIT ? OFFSET ?';
+    let query = `
+      SELECT 
+        ParticipantID, FName, LName, Email, Phone, College, Role, CreatedAt
+      FROM Participants
+    `;
+
+    if (whereConditions.length > 0) {
+      query += ' WHERE ' + whereConditions.join(' AND ');
+    }
+
+    query += ' ORDER BY CreatedAt DESC LIMIT ? OFFSET ?';
     params.push(parseInt(limit), parseInt(offset));
 
     const [users] = await pool.execute(query, params);
 
-    // Get total count for pagination
-    let countQuery = 'SELECT COUNT(*) as total FROM Participants WHERE 1=1';
-    const countParams = [];
+    // Get total count for pagination (use same filters but no LIMIT)
+    let countParams = [];
+    let countQuery = 'SELECT COUNT(*) as total FROM Participants';
 
-    if (role) {
-      countQuery += ' AND Role = ?';
-      countParams.push(role);
-    }
-
-    if (college) {
-      countQuery += ' AND College = ?';
-      countParams.push(college);
+    if (whereConditions.length > 0) {
+      countQuery += ' WHERE ' + whereConditions.join(' AND ');
+      // Rebuild params for count query (same where conditions, no LIMIT)
+      countParams = [];
+      if (role) countParams.push(role);
+      if (college) countParams.push(college);
     }
 
     const [countResult] = await pool.execute(countQuery, countParams);
@@ -63,6 +65,7 @@ router.get('/users', authenticateToken, roleGuard(['admin']), async (req, res, n
     next(error);
   }
 });
+
 
 // Get user by ID (admin only)
 router.get('/users/:id', authenticateToken, roleGuard(['admin']), async (req, res, next) => {

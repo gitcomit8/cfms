@@ -7,9 +7,7 @@ const router = express.Router();
 // Get all events (public) with filtering
 router.get('/', async (req, res, next) => {
   try {
-    const { category, status, search, limit = 50, offset = 0 } = req.query;
-    
-    let query = `
+    const [rows] = await pool.execute(`
       SELECT 
         e.EventID, e.EventName, e.Category, e.Description, 
         e.EventDate, e.StartTime, e.EndTime, e.Max_Capacity, 
@@ -17,36 +15,15 @@ router.get('/', async (req, res, next) => {
         v.VenueName, v.Street, v.City, v.State, v.ZIP, v.Capacity as VenueCapacity
       FROM Events e
       LEFT JOIN Venues v ON e.VenueID = v.VenueID
-      WHERE 1=1
-    `;
-    const params = [];
-
-    if (category) {
-      query += ' AND e.Category = ?';
-      params.push(category);
-    }
-
-    if (status) {
-      query += ' AND e.Status = ?';
-      params.push(status);
-    }
-
-    if (search) {
-      query += ' AND (e.EventName LIKE ? OR e.Description LIKE ?)';
-      params.push(`%${search}%`, `%${search}%`);
-    }
-
-    query += ' ORDER BY e.EventDate ASC, e.StartTime ASC';
-    query += ' LIMIT ? OFFSET ?';
-    params.push(parseInt(limit), parseInt(offset));
-
-    const [rows] = await pool.execute(query, params);
+      ORDER BY e.EventDate ASC, e.StartTime ASC
+      LIMIT 50
+    `);
 
     res.json({
       events: rows,
       pagination: {
-        limit: parseInt(limit),
-        offset: parseInt(offset),
+        limit: 50,
+        offset: 0,
         count: rows.length
       }
     });
@@ -125,7 +102,7 @@ router.post('/', authenticateToken, roleGuard(['admin']), async (req, res, next)
       INSERT INTO Events 
       (VenueID, EventName, Category, Description, EventDate, StartTime, EndTime, Max_Capacity, TeamSize, Status)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `, [venueId || null, eventName, category, description, eventDate, startTime, endTime, maxCapacity, teamSize, status]);
+    `, [venueId || null, eventName, category || null, description || null, eventDate, startTime || null, endTime || null, maxCapacity, teamSize, status]);
 
     // Fetch the created event
     const [eventRows] = await pool.execute(`
@@ -178,11 +155,11 @@ router.put('/:id', authenticateToken, roleGuard(['admin']), async (req, res, nex
     }
     if (category !== undefined) {
       updates.push('Category = ?');
-      params.push(category);
+      params.push(category || null);
     }
     if (description !== undefined) {
       updates.push('Description = ?');
-      params.push(description);
+      params.push(description || null);
     }
     if (eventDate !== undefined) {
       updates.push('EventDate = ?');
@@ -190,11 +167,11 @@ router.put('/:id', authenticateToken, roleGuard(['admin']), async (req, res, nex
     }
     if (startTime !== undefined) {
       updates.push('StartTime = ?');
-      params.push(startTime);
+      params.push(startTime || null);
     }
     if (endTime !== undefined) {
       updates.push('EndTime = ?');
-      params.push(endTime);
+      params.push(endTime || null);
     }
     if (maxCapacity !== undefined) {
       updates.push('Max_Capacity = ?');
