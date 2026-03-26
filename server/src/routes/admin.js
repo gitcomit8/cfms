@@ -7,55 +7,23 @@ const router = express.Router();
 // Get all users (admin only)
 router.get('/users', authenticateToken, roleGuard(['admin']), async (req, res, next) => {
   try {
-    const { role, college, limit = 50, offset = 0 } = req.query;
+    const limit = Math.max(1, Math.min(100, parseInt(req.query.limit) || 50));
+    const offset = Math.max(0, parseInt(req.query.offset) || 0);
 
-    let whereConditions = [];
-    let params = [];
+    // Get paginated users
+    const [users] = await pool.execute(
+      'SELECT ParticipantID, FName, LName, Email, Phone, College, Role, CreatedAt FROM Participants ORDER BY CreatedAt DESC LIMIT ? OFFSET ?',
+      [limit, offset]
+    );
 
-    if (role) {
-      whereConditions.push('Role = ?');
-      params.push(role);
-    }
-
-    if (college) {
-      whereConditions.push('College = ?');
-      params.push(college);
-    }
-
-    let query = `
-      SELECT 
-        ParticipantID, FName, LName, Email, Phone, College, Role, CreatedAt
-      FROM Participants
-    `;
-
-    if (whereConditions.length > 0) {
-      query += ' WHERE ' + whereConditions.join(' AND ');
-    }
-
-    query += ' ORDER BY CreatedAt DESC LIMIT ? OFFSET ?';
-    params.push(parseInt(limit), parseInt(offset));
-
-    const [users] = await pool.execute(query, params);
-
-    // Get total count for pagination (use same filters but no LIMIT)
-    let countParams = [];
-    let countQuery = 'SELECT COUNT(*) as total FROM Participants';
-
-    if (whereConditions.length > 0) {
-      countQuery += ' WHERE ' + whereConditions.join(' AND ');
-      // Rebuild params for count query (same where conditions, no LIMIT)
-      countParams = [];
-      if (role) countParams.push(role);
-      if (college) countParams.push(college);
-    }
-
-    const [countResult] = await pool.execute(countQuery, countParams);
+    // Get total count
+    const [countResult] = await pool.execute('SELECT COUNT(*) as total FROM Participants');
 
     res.json({
       users: users,
       pagination: {
-        limit: parseInt(limit),
-        offset: parseInt(offset),
+        limit: limit,
+        offset: offset,
         count: users.length,
         total: countResult[0].total
       }
