@@ -23,13 +23,13 @@ INSERT INTO Venues (VenueName, Street, City, State, ZIP, Capacity) VALUES
 
 -- Participants (password = 'password123' hashed with bcrypt)
 INSERT INTO Participants (FName, LName, Email, PasswordHash, Phone, College, Role) VALUES
-('Arjun', 'Sharma', 'arjun@college.edu', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '9876543210', 'ABC College', 'student'),
-('Priya', 'Singh', 'priya@college.edu', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '9876543211', 'ABC College', 'student'),
-('Rahul', 'Kumar', 'rahul@college.edu', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '9876543212', 'XYZ University', 'student'),
-('Sneha', 'Patel', 'sneha@college.edu', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '9876543213', 'DEF Institute', 'student'),
-('Ayush', 'Gupta', 'ayush@college.edu', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '9876543214', 'ABC College', 'admin'),
-('Dr. Ayaan', 'Khan', 'ayaan@college.edu', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '9876543215', 'ABC College', 'judge'),
-('Prof. Meera', 'Nair', 'meera@college.edu', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '9876543216', 'ABC College', 'judge');
+('Arjun', 'Sharma', 'arjun@college.edu', '$2a$10$NDjd3MwYMt537L5QvH1yd.pqlWM0kw/huBkXqpUHwnLAvkdJuv2li', '9876543210', 'ABC College', 'student'),
+('Priya', 'Singh', 'priya@college.edu', '$2a$10$NDjd3MwYMt537L5QvH1yd.pqlWM0kw/huBkXqpUHwnLAvkdJuv2li', '9876543211', 'ABC College', 'student'),
+('Rahul', 'Kumar', 'rahul@college.edu', '$2a$10$NDjd3MwYMt537L5QvH1yd.pqlWM0kw/huBkXqpUHwnLAvkdJuv2li', '9876543212', 'XYZ University', 'student'),
+('Sneha', 'Patel', 'sneha@college.edu', '$2a$10$NDjd3MwYMt537L5QvH1yd.pqlWM0kw/huBkXqpUHwnLAvkdJuv2li', '9876543213', 'DEF Institute', 'student'),
+('Ayush', 'Gupta', 'ayush@college.edu', '$2a$10$NDjd3MwYMt537L5QvH1yd.pqlWM0kw/huBkXqpUHwnLAvkdJuv2li', '9876543214', 'ABC College', 'admin'),
+('Dr. Ayaan', 'Khan', 'ayaan@college.edu', '$2a$10$NDjd3MwYMt537L5QvH1yd.pqlWM0kw/huBkXqpUHwnLAvkdJuv2li', '9876543215', 'ABC College', 'judge'),
+('Prof. Meera', 'Nair', 'meera@college.edu', '$2a$10$NDjd3MwYMt537L5QvH1yd.pqlWM0kw/huBkXqpUHwnLAvkdJuv2li', '9876543216', 'ABC College', 'judge');
 
 -- Events
 INSERT INTO Events (VenueID, EventName, Category, Description, EventDate, StartTime, EndTime, Max_Capacity, TeamSize, Status) VALUES
