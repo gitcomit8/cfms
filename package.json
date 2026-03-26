@@ -1,0 +1,18 @@
+{
+  "name": "cfms",
+  "private": true,
+  "scripts": {
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "db:wait": "sleep 10",
+    "db:init": "docker exec -i cfms-mysql mysql -u cfms_user -pcfms_password cfms < database/schema.sql && docker exec -i cfms-mysql mysql -u cfms_user -pcfms_password cfms < database/triggers.sql && docker exec -i cfms-mysql mysql -u cfms_user -pcfms_password cfms < database/procedures.sql",
+    "db:seed": "docker exec -i cfms-mysql mysql -u cfms_user -pcfms_password cfms < database/seed.sql",
+    "setup": "npm run docker:up && npm run db:wait && npm run db:init && npm run db:seed"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
