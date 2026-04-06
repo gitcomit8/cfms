@@ -464,42 +464,55 @@ CALL GenerateLeaderboard(1);
 
 ### Local Development Setup
 
-1. **Clone Repository**
+**🚀 Option 1: Management Scripts (Recommended)**
 ```bash
+# Clone and navigate
 git clone <repository-url>
 cd cfms
+
+# Initialize database (one time only)
+npm run db:init
+npm run db:seed
+
+# Start all services with management scripts
+./scripts/start.sh
+
+# View logs in real-time
+./scripts/logs.sh -f
+
+# Check system status
+./scripts/status.sh
+
+# Stop all services when done
+./scripts/stop.sh
 ```
 
-2. **Start Database**
+**⚙️ Option 2: Manual Setup**
 ```bash
+# 1. Clone Repository
+git clone <repository-url>
+cd cfms
+
+# 2. Start Database
 npm run docker:up
 # Wait 10 seconds for MySQL to initialize
 npm run db:wait
-```
 
-3. **Initialize Database**
-```bash
+# 3. Initialize Database  
 npm run db:init
 npm run db:seed
-```
 
-4. **Install Dependencies**
-```bash
-# Root dependencies
+# 4. Install Dependencies
 npm install
-
-# Server dependencies  
 cd server && npm install
-
-# Client dependencies
 cd ../client && npm install
-```
 
-5. **Start Development Servers**
-```bash
-# From project root
-npm run dev
-# This starts both client (5173) and server (3002)
+# 5. Start Development Servers
+# Terminal 1: Backend
+cd server && npm start
+
+# Terminal 2: Frontend  
+cd client && npm run dev
 ```
 
 ### Environment Configuration
