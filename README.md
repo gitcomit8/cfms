@@ -38,22 +38,76 @@ CFMS is a comprehensive college festival management platform that enables studen
 
 ## 🚀 Getting Started
 
-### System Access
-- **Website**: http://localhost:5173
-- **API Base URL**: http://localhost:3002/api/v1
+### Prerequisites
+- **Node.js** 18+ and **npm**
+- **Docker** and **Docker Compose** (for MySQL)
+
+---
+
+### Quick Start (3 steps)
+
+**1. Start the database**
+```bash
+docker-compose up -d
+```
+MySQL starts on port 3306. On first run Docker auto-loads all schema + seed files from `./database/`.
+
+**2. Start the backend server**
+```bash
+cd server
+npm install        # first time only
+npm run dev
+```
+API available at http://localhost:3002/api/v1
+
+**3. Start the frontend**
+```bash
+# in a new terminal
+cd client
+npm install        # first time only
+npm run dev
+```
+App available at http://localhost:5173
+
+> **Helper scripts** (optional): `./scripts/start.sh` / `./scripts/stop.sh` / `./scripts/status.sh`
+
+---
 
 ### Test Accounts
 | Role | Email | Password | Access Level |
 |------|-------|----------|--------------|
-| Student | arjun@college.edu | password123 | Event registration, team creation |
+| Student | pratik@college.edu | password123 | Event registration, team creation |
 | Admin | ayush@college.edu | password123 | Full event management |
 | Judge | ayaan@college.edu | password123 | Scoring and leaderboards |
 
-### First Time Setup
-1. Visit http://localhost:5173
-2. Click "Get Started" or "Login" 
-3. Use test accounts above or register new account
-4. Explore available events and features
+---
+
+### Walkthrough by Role
+
+#### As a Student (`pratik@college.edu`)
+1. Log in at http://localhost:5173 → **Login**
+2. Click **Events** in the nav to browse all events
+3. Open any event → click **Register for Event** (individual events)
+4. For team events (Team Size > 1):
+   - Go to **Create Team** (nav → My Teams → Create Team), pick the event, enter a name
+   - Share the displayed join code with teammates
+   - Teammates go to **Join Team** and enter the code
+5. See all your registrations under **My Events**
+
+#### As an Admin (`ayush@college.edu`)
+1. Log in — the nav shows **Events**, **Venues**, **Users** under the admin section
+2. Go to **Events** → click **Add Event** to create a new event (fill venue, date, capacity, team size)
+3. Go to **Venues** → add or edit venue details
+4. Go to **Users** → change a user's role using the dropdown in the table
+5. Delete any event, venue, or user with the **Delete** button
+
+#### As a Judge (`ayaan@college.edu`)
+1. Log in — nav shows **Score Entry** and **Leaderboard**
+2. Go to **Score Entry**:
+   - Select an event → select a team
+   - Add criteria rows (name + score 1–10 + weight)
+   - Click **Submit Scores**
+3. Go to **Leaderboard** → select an event to see ranked teams with weighted averages
 
 ---
 
@@ -227,7 +281,7 @@ Authenticate existing user.
 curl -X POST http://localhost:3002/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "arjun@college.edu",
+    "email": "pratik@college.edu",
     "password": "password123"
   }'
 ```
@@ -614,7 +668,7 @@ curl http://localhost:3002/api/v1/events
 # Login test
 curl -X POST http://localhost:3002/api/v1/auth/login \
   -H "Content-Type: application/json" \
-  -d '{"email": "arjun@college.edu", "password": "password123"}'
+  -d '{"email": "pratik@college.edu", "password": "password123"}'
 ```
 
 ### Database Verification
