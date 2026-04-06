@@ -18,7 +18,7 @@ const EventDetail = () => {
   const fetchEvent = async () => {
     try {
       setLoading(true);
-      const data = await getEvent(id);
+      const { data } = await getEvent(id);
       setEvent(data.event);
       setTeams(data.teams || []);
     } catch (err) {

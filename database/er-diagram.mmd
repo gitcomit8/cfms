@@ -1,0 +1,78 @@
+---
+title: CFMS Entity-Relationship Diagram (BCNF Normalized)
+---
+erDiagram
+    Venues {
+        int VenueID PK
+        varchar VenueName
+        varchar Street
+        varchar City
+        varchar State
+        varchar ZIP
+        int Capacity
+    }
+
+    Participants {
+        int ParticipantID PK
+        varchar FName
+        varchar LName
+        varchar Email UK
+        varchar PasswordHash
+        varchar Phone
+        varchar College
+        enum Role
+        datetime CreatedAt
+    }
+
+    Events {
+        int EventID PK
+        int VenueID FK
+        varchar EventName
+        varchar Category
+        text Description
+        date EventDate
+        time StartTime
+        time EndTime
+        int Max_Capacity
+        int Current_Capacity
+        int TeamSize
+        enum Status
+    }
+
+    Teams {
+        int TeamID PK
+        int EventID FK
+        varchar TeamName
+        varchar JoinCode UK
+        int LeaderID FK
+        datetime CreatedAt
+    }
+
+    Registrations {
+        int ParticipantID PK_FK
+        int EventID PK_FK
+        int TeamID FK
+        datetime RegDate
+        enum Status
+    }
+
+    Judges_Scores {
+        int ScoreID PK
+        int JudgeID FK
+        int TeamID FK
+        int EventID FK
+        varchar CriteriaName
+        decimal Score
+        decimal Weight
+        datetime ScoredAt
+    }
+
+    Venues ||--o{ Events : "hosts"
+    Events ||--o{ Teams : "has"
+    Events ||--o{ Registrations : "receives"
+    Participants ||--o{ Registrations : "makes"
+    Participants ||--o{ Teams : "leads"
+    Teams ||--o{ Registrations : "groups"
+    Teams ||--o{ Judges_Scores : "scored_in"
+    Events ||--o{ Judges_Scores : "for"
+    Participants ||--o{ Judges_Scores : "judges"

@@ -38,16 +38,10 @@ const Navbar = () => {
                 {/* Role-specific navigation */}
                 {isStudent && (
                   <div className="flex space-x-2">
-                    <Link 
-                      to="/my-registrations"
-                      className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm"
-                    >
+                    <Link to="/my-registrations" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm">
                       My Events
                     </Link>
-                    <Link 
-                      to="/my-teams"
-                      className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm"
-                    >
+                    <Link to="/my-teams" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm">
                       My Teams
                     </Link>
                   </div>
@@ -55,28 +49,27 @@ const Navbar = () => {
 
                 {isAdmin && (
                   <div className="flex space-x-2">
-                    <Link 
-                      to="/admin/events"
-                      className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm"
-                    >
-                      Manage Events
+                    <Link to="/admin/events" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm">
+                      Events
                     </Link>
-                    <Link 
-                      to="/admin/venues"
-                      className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm"
-                    >
-                      Manage Venues
+                    <Link to="/admin/venues" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm">
+                      Venues
+                    </Link>
+                    <Link to="/admin/users" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm">
+                      Users
                     </Link>
                   </div>
                 )}
 
                 {isJudge && (
-                  <Link 
-                    to="/judge/score"
-                    className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm"
-                  >
-                    Score Events
-                  </Link>
+                  <div className="flex space-x-2">
+                    <Link to="/judge/score" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm">
+                      Score Entry
+                    </Link>
+                    <Link to="/judge/leaderboard" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm">
+                      Leaderboard
+                    </Link>
+                  </div>
                 )}
 
                 <button

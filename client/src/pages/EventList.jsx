@@ -19,7 +19,7 @@ const EventList = () => {
   const fetchEvents = async () => {
     try {
       setLoading(true);
-      const data = await getEvents(filters);
+      const { data } = await getEvents(filters);
       setEvents(data.events);
     } catch (err) {
       setError('Failed to fetch events');
