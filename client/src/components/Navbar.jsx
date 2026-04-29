@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import ThemeSwitcher from './ThemeSwitcher';
-import '../styles/navbar.css';
 
 const Navbar = () => {
   const { user, logout, isAuthenticated, isAdmin, isJudge, isStudent } = useAuth();
