@@ -1,12 +1,15 @@
-/* Modern Navbar Styling */
+/* ============================================
+   Modern Navbar Styling
+   ============================================ */
 
 .navbar {
   position: sticky;
   top: 0;
   z-index: 1000;
-  backdrop-filter: blur(16px);
+  backdrop-filter: var(--blur-md);
   border-bottom: 1px solid var(--border-color);
   animation: slideInDown 0.6s ease-out;
+  background: var(--color-bg-glass);
 }
 
 .navbar-content {
@@ -15,6 +18,7 @@
   justify-content: space-between;
   height: 70px;
   gap: 2rem;
+  width: 100%;
 }
 
 /* Brand */
@@ -25,6 +29,7 @@
   text-decoration: none;
   transition: all var(--transition-fast);
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .navbar-brand:hover {
@@ -51,7 +56,7 @@
   display: flex;
   gap: 2rem;
   align-items: center;
-  flex: 1;
+  flex: 0 1 auto;
 }
 
 .nav-link {
@@ -60,6 +65,7 @@
   color: var(--color-text-secondary);
   transition: color var(--transition-fast);
   padding: 0.5rem 0;
+  white-space: nowrap;
 }
 
 .nav-link::after {
@@ -74,7 +80,7 @@
 }
 
 .nav-link:hover {
-  color: var(--color-accent-primary);
+  color: var(--color-grape);
 }
 
 .nav-link:hover::after {
@@ -87,6 +93,8 @@
   align-items: center;
   gap: 1.5rem;
   margin-left: auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .user-welcome {
@@ -94,11 +102,12 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: var(--color-bg-glass);
+  background: var(--color-bg-accent);
   backdrop-filter: var(--blur-md);
   border-radius: 8px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-accent);
   animation: fadeInLeft 0.6s ease-out 0.2s both;
+  white-space: nowrap;
 }
 
 .welcome-text {
@@ -127,12 +136,13 @@
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
   border: 1px solid transparent;
+  white-space: nowrap;
 }
 
 .sub-link:hover {
-  color: var(--color-accent-primary);
-  background: rgba(99, 102, 241, 0.1);
-  border-color: var(--color-accent-primary);
+  color: var(--color-grape);
+  background: var(--color-bg-accent);
+  border-color: var(--color-grape);
 }
 
 /* Buttons in navbar */
@@ -141,6 +151,7 @@
   padding: 0.6rem 1.2rem;
   border-radius: 8px;
   animation: fadeInRight 0.6s ease-out 0.4s both;
+  white-space: nowrap;
 }
 
 .navbar-actions .btn-primary {
@@ -150,13 +161,13 @@
 }
 
 .navbar-actions .btn-outline {
-  border: 2px solid var(--color-accent-primary);
-  color: var(--color-accent-primary);
+  border: 2px solid var(--color-grape);
+  color: var(--color-grape);
   background: transparent;
 }
 
 .navbar-actions .btn-outline:hover {
-  background: var(--color-accent-primary);
+  background: var(--color-grape);
   color: white;
 }
 
@@ -204,5 +215,10 @@
 
   .navbar-actions .btn {
     padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
   }
 }
