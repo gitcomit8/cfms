@@ -5,6 +5,8 @@ import Navbar from './components/Navbar';
 // Public pages
 import Landing from './pages/Landing';
 import Auth from './pages/Auth';
+import DemoUsers from './pages/DemoUsers';
+import SchemaVisualizer from './pages/SchemaVisualizer';
 import EventList from './pages/EventList';
 import EventDetail from './pages/EventDetail';
 
@@ -51,6 +53,8 @@ const AppContent = () => {
         {/* Public */}
         <Route path="/" element={<Landing />} />
         <Route path="/auth" element={user ? <Navigate to="/" replace /> : <Auth />} />
+        <Route path="/demo-users" element={<DemoUsers />} />
+        <Route path="/schema" element={<ProtectedRoute><SchemaVisualizer /></ProtectedRoute>} />
         <Route path="/events" element={<EventList />} />
         <Route path="/events/:id" element={<EventDetail />} />
 

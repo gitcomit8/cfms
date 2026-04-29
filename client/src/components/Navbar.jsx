@@ -25,6 +25,12 @@ const Navbar = () => {
               >
                 Events
               </Link>
+              <Link 
+                to="/schema" 
+                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
+              >
+                Schema
+              </Link>
             </div>
           </div>
 
@@ -80,12 +86,20 @@ const Navbar = () => {
                 </button>
               </>
             ) : (
-              <Link 
-                to="/auth"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 text-sm rounded-md"
-              >
-                Login
-              </Link>
+              <>
+                <Link 
+                  to="/demo-users"
+                  className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
+                >
+                  Demo Users
+                </Link>
+                <Link 
+                  to="/auth"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 text-sm rounded-md"
+                >
+                  Login
+                </Link>
+              </>
             )}
           </div>
         </div>

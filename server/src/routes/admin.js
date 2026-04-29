@@ -12,8 +12,7 @@ router.get('/users', authenticateToken, roleGuard(['admin']), async (req, res, n
 
     // Get paginated users
     const [users] = await pool.execute(
-      'SELECT ParticipantID, FName, LName, Email, Phone, College, Role, CreatedAt FROM Participants ORDER BY CreatedAt DESC LIMIT ? OFFSET ?',
-      [limit, offset]
+      `SELECT ParticipantID, FName, LName, Email, Phone, College, Role, CreatedAt FROM Participants ORDER BY CreatedAt DESC LIMIT ${limit} OFFSET ${offset}`
     );
 
     // Get total count

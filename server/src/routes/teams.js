@@ -248,7 +248,8 @@ router.get('/:id', authenticateToken, async (req, res, next) => {
 router.get('/event/:eventId', authenticateToken, async (req, res, next) => {
   try {
     const { eventId } = req.params;
-    const { limit = 50, offset = 0 } = req.query;
+    const limit = Math.max(1, Math.min(100, parseInt(req.query.limit) || 50));
+    const offset = Math.max(0, parseInt(req.query.offset) || 0);
 
     const [teams] = await pool.execute(`
       SELECT 
@@ -261,14 +262,14 @@ router.get('/event/:eventId', authenticateToken, async (req, res, next) => {
       WHERE t.EventID = ?
       GROUP BY t.TeamID, t.EventID, t.TeamName, t.JoinCode, t.LeaderID, t.CreatedAt, p.FName, p.LName
       ORDER BY t.CreatedAt DESC
-      LIMIT ? OFFSET ?
-    `, [eventId, parseInt(limit), parseInt(offset)]);
+      LIMIT ${limit} OFFSET ${offset}
+    `, [eventId]);
 
     res.json({
       teams: teams,
       pagination: {
-        limit: parseInt(limit),
-        offset: parseInt(offset),
+        limit: limit,
+        offset: offset,
         count: teams.length
       }
     });

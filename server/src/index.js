@@ -10,6 +10,7 @@ import registrationsRoutes from './routes/registrations.js';
 import teamsRoutes from './routes/teams.js';
 import scoresRoutes from './routes/scores.js';
 import adminRoutes from './routes/admin.js';
+import schemaRoutes from './routes/schema.js';
 
 dotenv.config();
 
@@ -32,6 +33,7 @@ app.use('/api/v1/registrations', registrationsRoutes);
 app.use('/api/v1/teams', teamsRoutes);
 app.use('/api/v1/scores', scoresRoutes);
 app.use('/api/v1/admin', adminRoutes);
+app.use('/api/v1/schema', schemaRoutes);
 
 // Error handling middleware (must be last)
 app.use(errorHandler);
