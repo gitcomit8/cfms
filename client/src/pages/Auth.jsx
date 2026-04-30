@@ -52,18 +52,18 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-charcoal/5 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-charcoal">
             {isLogin ? 'Sign in to your account' : 'Create your account'}
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
+          <p className="mt-2 text-center text-sm text-charcoal/80">
             {isLogin ? "Don't have an account? " : 'Already have an account? '}
             <button
               type="button"
               onClick={() => setIsLogin(!isLogin)}
-              className="font-medium text-blue-600 hover:text-blue-500"
+              className="font-medium text-grape hover:text-grape/80"
             >
               {isLogin ? 'Sign up' : 'Sign in'}
             </button>
@@ -90,7 +90,7 @@ const Auth = () => {
                       name="firstName"
                       type="text"
                       required
-                      className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      className="relative block w-full px-3 py-2 border border-gray-300 placeholder-charcoal/60 text-charcoal rounded-md focus:outline-none focus:ring-grape/80 focus:border-grape/80"
                       placeholder="First Name"
                       value={formData.firstName}
                       onChange={handleChange}
@@ -105,7 +105,7 @@ const Auth = () => {
                       name="lastName"
                       type="text"
                       required
-                      className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      className="relative block w-full px-3 py-2 border border-gray-300 placeholder-charcoal/60 text-charcoal rounded-md focus:outline-none focus:ring-grape/80 focus:border-grape/80"
                       placeholder="Last Name"
                       value={formData.lastName}
                       onChange={handleChange}
@@ -121,7 +121,7 @@ const Auth = () => {
                     id="phone"
                     name="phone"
                     type="tel"
-                    className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="relative block w-full px-3 py-2 border border-gray-300 placeholder-charcoal/60 text-charcoal rounded-md focus:outline-none focus:ring-grape/80 focus:border-grape/80"
                     placeholder="Phone Number (optional)"
                     value={formData.phone}
                     onChange={handleChange}
@@ -136,7 +136,7 @@ const Auth = () => {
                     id="college"
                     name="college"
                     type="text"
-                    className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="relative block w-full px-3 py-2 border border-gray-300 placeholder-charcoal/60 text-charcoal rounded-md focus:outline-none focus:ring-grape/80 focus:border-grape/80"
                     placeholder="College (optional)"
                     value={formData.college}
                     onChange={handleChange}
@@ -150,7 +150,7 @@ const Auth = () => {
                   <select
                     id="role"
                     name="role"
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-grape/80 focus:border-grape/80"
                     value={formData.role}
                     onChange={handleChange}
                   >
@@ -171,7 +171,7 @@ const Auth = () => {
                 name="email"
                 type="email"
                 required
-                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-charcoal/60 text-charcoal rounded-md focus:outline-none focus:ring-grape/80 focus:border-grape/80"
                 placeholder="Email address"
                 value={formData.email}
                 onChange={handleChange}
@@ -187,7 +187,7 @@ const Auth = () => {
                 name="password"
                 type="password"
                 required
-                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-charcoal/60 text-charcoal rounded-md focus:outline-none focus:ring-grape/80 focus:border-grape/80"
                 placeholder="Password"
                 value={formData.password}
                 onChange={handleChange}
@@ -199,7 +199,7 @@ const Auth = () => {
             <button
               type="submit"
               disabled={loading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-grape hover:bg-grape focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-grape/80 disabled:opacity-50"
             >
               {loading ? 'Please wait...' : (isLogin ? 'Sign In' : 'Sign Up')}
             </button>

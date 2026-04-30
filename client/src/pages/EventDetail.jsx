@@ -50,8 +50,8 @@ const EventDetail = () => {
     return (
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Event Not Found</h2>
-          <Link to="/events" className="text-blue-600 hover:text-blue-500">
+          <h2 className="text-2xl font-bold text-charcoal mb-4">Event Not Found</h2>
+          <Link to="/events" className="text-grape hover:text-grape/80">
             Back to Events
           </Link>
         </div>
@@ -65,7 +65,7 @@ const EventDetail = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="mb-6">
-        <Link to="/events" className="text-blue-600 hover:text-blue-500 text-sm">
+        <Link to="/events" className="text-grape hover:text-grape/80 text-sm">
           ← Back to Events
         </Link>
       </div>
@@ -75,11 +75,11 @@ const EventDetail = () => {
         <div className="lg:col-span-2">
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="flex justify-between items-start mb-4">
-              <h1 className="text-3xl font-bold text-gray-900">{event.EventName}</h1>
+              <h1 className="text-3xl font-bold text-charcoal">{event.EventName}</h1>
               <span className={`px-3 py-1 text-sm rounded-full ${
-                event.Status === 'upcoming' ? 'bg-blue-100 text-blue-800' :
-                event.Status === 'active' ? 'bg-green-100 text-green-800' :
-                'bg-gray-100 text-gray-800'
+                event.Status === 'upcoming' ? 'bg-blue/50 text-blue-800' :
+                event.Status === 'active' ? 'bg-green/20 text-green-800' :
+                'bg-charcoal/10 text-charcoal'
               }`}>
                 {event.Status}
               </span>
@@ -87,13 +87,13 @@ const EventDetail = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               <div>
-                <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide">Category</h3>
-                <p className="mt-1 text-sm text-gray-900">{event.Category || 'General'}</p>
+                <h3 className="text-sm font-medium text-charcoal/60 uppercase tracking-wide">Category</h3>
+                <p className="mt-1 text-sm text-charcoal">{event.Category || 'General'}</p>
               </div>
               
               <div>
-                <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide">Date</h3>
-                <p className="mt-1 text-sm text-gray-900">
+                <h3 className="text-sm font-medium text-charcoal/60 uppercase tracking-wide">Date</h3>
+                <p className="mt-1 text-sm text-charcoal">
                   {new Date(event.EventDate).toLocaleDateString('en-US', {
                     weekday: 'long',
                     year: 'numeric',
@@ -105,8 +105,8 @@ const EventDetail = () => {
 
               {event.StartTime && (
                 <div>
-                  <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide">Time</h3>
-                  <p className="mt-1 text-sm text-gray-900">
+                  <h3 className="text-sm font-medium text-charcoal/60 uppercase tracking-wide">Time</h3>
+                  <p className="mt-1 text-sm text-charcoal">
                     {event.StartTime} - {event.EndTime || 'TBD'}
                   </p>
                 </div>
@@ -114,11 +114,11 @@ const EventDetail = () => {
 
               {event.VenueName && (
                 <div>
-                  <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide">Venue</h3>
-                  <p className="mt-1 text-sm text-gray-900">
+                  <h3 className="text-sm font-medium text-charcoal/60 uppercase tracking-wide">Venue</h3>
+                  <p className="mt-1 text-sm text-charcoal">
                     {event.VenueName}
                     {event.City && (
-                      <span className="text-gray-500">, {event.City}</span>
+                      <span className="text-charcoal/60">, {event.City}</span>
                     )}
                   </p>
                 </div>
@@ -127,7 +127,7 @@ const EventDetail = () => {
 
             {event.Description && (
               <div className="mb-6">
-                <h3 className="text-lg font-medium text-gray-900 mb-2">About This Event</h3>
+                <h3 className="text-lg font-medium text-charcoal mb-2">About This Event</h3>
                 <p className="text-gray-700 leading-relaxed">{event.Description}</p>
               </div>
             )}
@@ -136,17 +136,17 @@ const EventDetail = () => {
           {/* Teams Section */}
           {teams.length > 0 && (
             <div className="mt-8 bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">
+              <h3 className="text-lg font-medium text-charcoal mb-4">
                 Registered Teams ({teams.length})
               </h3>
               <div className="space-y-3">
                 {teams.map((team) => (
-                  <div key={team.TeamID} className="border border-gray-200 rounded-lg p-4">
-                    <h4 className="font-medium text-gray-900">{team.TeamName}</h4>
-                    <p className="text-sm text-gray-600">
+                  <div key={team.TeamID} className="border border-charcoal/20 rounded-lg p-4">
+                    <h4 className="font-medium text-charcoal">{team.TeamName}</h4>
+                    <p className="text-sm text-charcoal/80">
                       Leader: {team.FName} {team.LName} ({team.LeaderEmail})
                     </p>
-                    <p className="text-xs text-gray-500 mt-1">
+                    <p className="text-xs text-charcoal/60 mt-1">
                       Join Code: {team.JoinCode}
                     </p>
                   </div>
@@ -159,20 +159,20 @@ const EventDetail = () => {
         {/* Sidebar */}
         <div className="lg:col-span-1">
           <div className="bg-white rounded-lg shadow-md p-6 sticky top-8">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Event Details</h3>
+            <h3 className="text-lg font-medium text-charcoal mb-4">Event Details</h3>
             
             <div className="space-y-4">
               <div>
-                <span className="text-sm font-medium text-gray-500">Capacity</span>
+                <span className="text-sm font-medium text-charcoal/60">Capacity</span>
                 <div className="mt-1">
                   <div className="flex justify-between text-sm">
                     <span>{event.Current_Capacity} registered</span>
                     <span>{event.Max_Capacity} max</span>
                   </div>
-                  <div className="mt-1 bg-gray-200 rounded-full h-2">
+                  <div className="mt-1 bg-charcoal/20 rounded-full h-2">
                     <div 
                       className={`h-2 rounded-full ${
-                        isEventFull ? 'bg-red-500' : 'bg-blue-500'
+                        isEventFull ? 'bg-red-500' : 'bg-grape/80'
                       }`}
                       style={{
                         width: `${Math.min((event.Current_Capacity / event.Max_Capacity) * 100, 100)}%`
@@ -187,8 +187,8 @@ const EventDetail = () => {
 
               {event.TeamSize > 1 && (
                 <div>
-                  <span className="text-sm font-medium text-gray-500">Team Size</span>
-                  <p className="mt-1 text-sm text-gray-900">
+                  <span className="text-sm font-medium text-charcoal/60">Team Size</span>
+                  <p className="mt-1 text-sm text-charcoal">
                     {event.TeamSize} members per team
                   </p>
                 </div>
@@ -196,34 +196,34 @@ const EventDetail = () => {
 
               <div className="pt-4 border-t">
                 {canRegister ? (
-                  <button className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors">
+                  <button className="w-full bg-grape hover:bg-grape text-white px-4 py-2 rounded-md font-medium transition-colors">
                     Register for Event
                   </button>
                 ) : !isAuthenticated ? (
                   <Link 
                     to="/auth" 
-                    className="block w-full text-center bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-md font-medium transition-colors"
+                    className="block w-full text-center bg-charcoal/10 hover:bg-charcoal/20 text-charcoal px-4 py-2 rounded-md font-medium transition-colors"
                   >
                     Login to Register
                   </Link>
                 ) : isEventFull ? (
                   <button 
                     disabled 
-                    className="w-full bg-gray-300 text-gray-500 px-4 py-2 rounded-md font-medium cursor-not-allowed"
+                    className="w-full bg-gray-300 text-charcoal/60 px-4 py-2 rounded-md font-medium cursor-not-allowed"
                   >
                     Event Full
                   </button>
                 ) : event.Status !== 'upcoming' ? (
                   <button 
                     disabled 
-                    className="w-full bg-gray-300 text-gray-500 px-4 py-2 rounded-md font-medium cursor-not-allowed"
+                    className="w-full bg-gray-300 text-charcoal/60 px-4 py-2 rounded-md font-medium cursor-not-allowed"
                   >
                     Registration Closed
                   </button>
                 ) : (
                   <button 
                     disabled 
-                    className="w-full bg-gray-300 text-gray-500 px-4 py-2 rounded-md font-medium cursor-not-allowed"
+                    className="w-full bg-gray-300 text-charcoal/60 px-4 py-2 rounded-md font-medium cursor-not-allowed"
                   >
                     Cannot Register
                   </button>

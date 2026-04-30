@@ -100,7 +100,7 @@ const ManageEvents = () => {
     {
       key: 'Status', label: 'Status',
       render: (r) => {
-        const colors = { upcoming: 'bg-blue-100 text-blue-700', active: 'bg-green-100 text-green-700', completed: 'bg-gray-100 text-gray-600' };
+        const colors = { upcoming: 'bg-blue/50 text-grape', active: 'bg-green/20 text-green/90', completed: 'bg-charcoal/10 text-charcoal/80' };
         return <span className={`text-xs px-2 py-0.5 rounded-full ${colors[r.Status] || ''}`}>{r.Status}</span>;
       },
       noSort: true,
@@ -110,29 +110,29 @@ const ManageEvents = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Manage Events</h1>
-        <button onClick={openCreate} className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">
+        <h1 className="text-2xl font-bold text-charcoal">Manage Events</h1>
+        <button onClick={openCreate} className="bg-grape text-white px-4 py-2 rounded-lg text-sm hover:bg-grape">
           + New Event
         </button>
       </div>
 
       {showForm && (
-        <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+        <div className="bg-white rounded-xl border border-charcoal/20 p-6 mb-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="font-semibold text-gray-900">{editing ? 'Edit Event' : 'Create Event'}</h2>
-            <button onClick={() => setShowForm(false)} className="text-gray-400 hover:text-gray-600">✕</button>
+            <h2 className="font-semibold text-charcoal">{editing ? 'Edit Event' : 'Create Event'}</h2>
+            <button onClick={() => setShowForm(false)} className="text-gray-400 hover:text-charcoal/80">✕</button>
           </div>
           {error && <div className="mb-4 p-3 bg-red-50 text-red-700 rounded-lg border border-red-200 text-sm">{error}</div>}
           <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Event Name *</label>
+              <label className="block text-xs font-medium text-charcoal/80 mb-1">Event Name *</label>
               <input name="eventName" value={form.eventName} onChange={handleChange} required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-grape/80" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Category</label>
+              <label className="block text-xs font-medium text-charcoal/80 mb-1">Category</label>
               <select name="category" value={form.category} onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-grape/80">
                 <option value="tech">Tech</option>
                 <option value="cultural">Cultural</option>
                 <option value="business">Business</option>
@@ -140,59 +140,59 @@ const ManageEvents = () => {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Venue</label>
+              <label className="block text-xs font-medium text-charcoal/80 mb-1">Venue</label>
               <select name="venueId" value={form.venueId} onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-grape/80">
                 <option value="">No venue</option>
                 {venues.map((v) => <option key={v.VenueID} value={v.VenueID}>{v.VenueName}</option>)}
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Date *</label>
+              <label className="block text-xs font-medium text-charcoal/80 mb-1">Date *</label>
               <input type="date" name="eventDate" value={form.eventDate} onChange={handleChange} required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-grape/80" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Start Time</label>
+              <label className="block text-xs font-medium text-charcoal/80 mb-1">Start Time</label>
               <input type="time" name="startTime" value={form.startTime} onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-grape/80" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">End Time</label>
+              <label className="block text-xs font-medium text-charcoal/80 mb-1">End Time</label>
               <input type="time" name="endTime" value={form.endTime} onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-grape/80" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Max Capacity *</label>
+              <label className="block text-xs font-medium text-charcoal/80 mb-1">Max Capacity *</label>
               <input type="number" name="maxCapacity" value={form.maxCapacity} onChange={handleChange} required min="1"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-grape/80" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Team Size (1 = solo)</label>
+              <label className="block text-xs font-medium text-charcoal/80 mb-1">Team Size (1 = solo)</label>
               <input type="number" name="teamSize" value={form.teamSize} onChange={handleChange} min="1"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-grape/80" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Status</label>
+              <label className="block text-xs font-medium text-charcoal/80 mb-1">Status</label>
               <select name="status" value={form.status} onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-grape/80">
                 <option value="upcoming">Upcoming</option>
                 <option value="active">Active</option>
                 <option value="completed">Completed</option>
               </select>
             </div>
             <div className="col-span-2">
-              <label className="block text-xs font-medium text-gray-600 mb-1">Description</label>
+              <label className="block text-xs font-medium text-charcoal/80 mb-1">Description</label>
               <textarea name="description" value={form.description} onChange={handleChange} rows={2}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-grape/80" />
             </div>
             <div className="col-span-2 flex gap-3">
               <button type="submit" disabled={loading}
-                className="bg-blue-600 text-white px-5 py-2 rounded-lg text-sm hover:bg-blue-700 disabled:opacity-50">
+                className="bg-grape text-white px-5 py-2 rounded-lg text-sm hover:bg-grape disabled:opacity-50">
                 {loading ? 'Saving...' : editing ? 'Update Event' : 'Create Event'}
               </button>
               <button type="button" onClick={() => setShowForm(false)}
-                className="border border-gray-300 text-gray-700 px-5 py-2 rounded-lg text-sm hover:bg-gray-50">
+                className="border border-gray-300 text-gray-700 px-5 py-2 rounded-lg text-sm hover:bg-charcoal/5">
                 Cancel
               </button>
             </div>

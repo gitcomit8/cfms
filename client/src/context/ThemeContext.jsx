@@ -21,6 +21,11 @@ export const ThemeProvider = ({ children }) => {
   useEffect(() => {
     const html = document.documentElement;
     html.setAttribute('data-theme', theme);
+    if (theme === 'dark') {
+      html.classList.add('dark');
+    } else {
+      html.classList.remove('dark');
+    }
     localStorage.setItem('cfms-theme', theme);
   }, [theme]);
 

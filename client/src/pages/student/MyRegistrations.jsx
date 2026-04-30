@@ -30,13 +30,13 @@ const MyRegistrations = () => {
     }
   };
 
-  if (loading) return <div className="max-w-4xl mx-auto px-4 py-8 text-gray-500">Loading...</div>;
+  if (loading) return <div className="max-w-4xl mx-auto px-4 py-8 text-charcoal/60">Loading...</div>;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">My Registrations</h1>
-        <Link to="/events" className="text-blue-600 text-sm hover:text-blue-800">Browse Events →</Link>
+        <h1 className="text-2xl font-bold text-charcoal">My Registrations</h1>
+        <Link to="/events" className="text-grape text-sm hover:text-blue-800">Browse Events →</Link>
       </div>
 
       {error && (
@@ -44,9 +44,9 @@ const MyRegistrations = () => {
       )}
 
       {registrations.length === 0 ? (
-        <div className="text-center py-16 bg-white rounded-xl border border-gray-200">
-          <p className="text-gray-500 mb-4">You haven't registered for any events yet.</p>
-          <Link to="/events" className="bg-blue-600 text-white px-5 py-2 rounded-lg text-sm hover:bg-blue-700">
+        <div className="text-center py-16 bg-white rounded-xl border border-charcoal/20">
+          <p className="text-charcoal/60 mb-4">You haven't registered for any events yet.</p>
+          <Link to="/events" className="bg-grape text-white px-5 py-2 rounded-lg text-sm hover:bg-grape">
             Browse Events
           </Link>
         </div>
@@ -54,18 +54,18 @@ const MyRegistrations = () => {
         <div className="space-y-3">
           {registrations.map((r) => (
             <div key={`${r.ParticipantID}-${r.EventID}`}
-              className="bg-white rounded-xl border border-gray-200 p-5 flex justify-between items-center">
+              className="bg-white rounded-xl border border-charcoal/20 p-5 flex justify-between items-center">
               <div>
-                <h3 className="font-semibold text-gray-900">{r.EventName}</h3>
-                <p className="text-sm text-gray-500 mt-0.5">
+                <h3 className="font-semibold text-charcoal">{r.EventName}</h3>
+                <p className="text-sm text-charcoal/60 mt-0.5">
                   {r.EventDate} · {r.Category}
                   {r.VenueName && ` · ${r.VenueName}`}
-                  {r.TeamName && <span className="ml-2 text-blue-600">Team: {r.TeamName}</span>}
+                  {r.TeamName && <span className="ml-2 text-grape">Team: {r.TeamName}</span>}
                 </p>
               </div>
               <div className="flex items-center gap-3 shrink-0 ml-4">
                 <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${
-                  r.Status === 'confirmed' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'
+                  r.Status === 'confirmed' ? 'bg-green/20 text-green/90' : 'bg-charcoal/10 text-charcoal/60'
                 }`}>
                   {r.Status}
                 </span>

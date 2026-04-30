@@ -28,13 +28,13 @@ const JoinTeam = () => {
 
   return (
     <div className="max-w-md mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-gray-900 mb-2">Join a Team</h1>
-      <p className="text-gray-500 text-sm mb-6">Enter the 8-character code your team leader shared with you.</p>
+      <h1 className="text-2xl font-bold text-charcoal mb-2">Join a Team</h1>
+      <p className="text-charcoal/60 text-sm mb-6">Enter the 8-character code your team leader shared with you.</p>
 
       {error && <div className="mb-4 p-3 bg-red-50 text-red-700 rounded-lg border border-red-200">{error}</div>}
-      {success && <div className="mb-4 p-3 bg-green-50 text-green-700 rounded-lg border border-green-200">{success}</div>}
+      {success && <div className="mb-4 p-3 bg-green-50 text-green/90 rounded-lg border border-green-200">{success}</div>}
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-gray-200 p-6">
+      <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-charcoal/20 p-6">
         <div className="mb-5">
           <label className="block text-sm font-medium text-gray-700 mb-2">Join Code</label>
           <input
@@ -43,13 +43,13 @@ const JoinTeam = () => {
             value={joinCode}
             onChange={(e) => setJoinCode(e.target.value.toUpperCase())}
             maxLength={8}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg font-mono text-xl text-center tracking-widest uppercase focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg font-mono text-xl text-center tracking-widest uppercase focus:outline-none focus:ring-2 focus:ring-grape/80"
           />
         </div>
         <button
           type="submit"
           disabled={loading || joinCode.length !== 8}
-          className="w-full bg-blue-600 text-white py-2.5 rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 transition-colors"
+          className="w-full bg-grape text-white py-2.5 rounded-lg font-medium hover:bg-grape disabled:opacity-50 transition-colors"
         >
           {loading ? 'Joining...' : 'Join Team'}
         </button>
